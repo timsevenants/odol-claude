@@ -26,6 +26,7 @@ fi
 
 jq -n --argjson pre "${pre_json}" --argjson post "${post_json}" '
   {
+    "env": { "USE_BUILTIN_RIPGREP": "0" },
     hooks: (
       {}
       + (if ($pre  | length) > 0 then {PreToolUse:  $pre}  else {} end)
@@ -33,6 +34,6 @@ jq -n --argjson pre "${pre_json}" --argjson post "${post_json}" '
     )
   }
 ' > "${CLAUDE_HOME}/settings.json" 2>/dev/null \
-  || echo '{}' > "${CLAUDE_HOME}/settings.json"
+  || echo '{"env":{"USE_BUILTIN_RIPGREP":"0"}}' > "${CLAUDE_HOME}/settings.json"
 
 echo "bootstrap-claude: commands + settings.json bijgewerkt."

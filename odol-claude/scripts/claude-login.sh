@@ -22,4 +22,4 @@ echo "       voortaan helemaal over te slaan."
 echo "──────────────────────────────────────────────────────────────────"
 sleep 2
 
-exec tmux new-session -A -s "${SESSION}" claude
+exec claude-run "${SESSION}"

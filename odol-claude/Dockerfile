@@ -34,6 +34,13 @@ RUN apk add --no-cache \
 # uv (voor 'uvx ha-mcp') via pip -> onafhankelijk van de Alpine-versie
 RUN pip install --no-cache-dir --break-system-packages uv
 
+# Runtime-eisen van Claude Code op musl/Alpine: libgcc en libstdc++ voor de
+# native binary, plus systeem-ripgrep omdat de meegeleverde ripgrep een
+# glibc-build is. Zonder deze drie stopt 'claude' direct bij het starten.
+# Zie https://code.claude.com/docs/en/setup#alpine-linux-and-musl-based-distributions
+RUN apk add --no-cache libgcc libstdc++ ripgrep
+ENV USE_BUILTIN_RIPGREP=0
+
 # Claude Code CLI via npm (vermijdt musl-binary-problemen)
 RUN npm install -g @anthropic-ai/claude-code@latest \
     && npm cache clean --force
@@ -45,6 +52,7 @@ COPY scripts/ /opt/scripts/
 RUN chmod +x /opt/scripts/*.sh /opt/scripts/hooks/*.sh \
     && ln -sf /opt/scripts/welcome.sh         /usr/local/bin/welcome \
     && ln -sf /opt/scripts/claude-login.sh    /usr/local/bin/claude-login \
+    && ln -sf /opt/scripts/claude-run.sh      /usr/local/bin/claude-run \
     && ln -sf /opt/scripts/session-picker.sh  /usr/local/bin/session-picker \
     && ln -sf /opt/scripts/ha-context.sh      /usr/local/bin/ha-context \
     && ln -sf /opt/scripts/setup-ha-mcp.sh    /usr/local/bin/setup-ha-mcp \

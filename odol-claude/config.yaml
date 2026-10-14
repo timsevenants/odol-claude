@@ -1,6 +1,6 @@
 name: "ODOL Claude"
 description: "Pro web-terminal met Claude Code: API-key login, HA-commands, back-ups, ha-mcp en fleet-tools"
-version: "1.0.1"
+version: "1.0.2"
 slug: "odol_claude"
 init: false
 

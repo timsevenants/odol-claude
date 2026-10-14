@@ -106,7 +106,7 @@ fi
 cd /config
 
 if bashio::config.true 'auto_launch_claude'; then
-  LAUNCH_CMD='welcome; if [ -n "$ANTHROPIC_API_KEY" ] || [ -f "$HOME/.claude/.credentials.json" ]; then tmux new-session -A -s claude claude; else claude-login; fi; echo; echo "Sessie beeindigd - typ \"session-picker\" of \"claude-login\"."; exec bash'
+  LAUNCH_CMD='welcome; if [ -n "$ANTHROPIC_API_KEY" ] || [ -f "$HOME/.claude/.credentials.json" ]; then claude-run claude; else claude-login; fi; echo; echo "Sessie beeindigd - typ \"session-picker\" of \"claude-login\"."; exec bash'
 else
   LAUNCH_CMD='exec session-picker'
 fi
