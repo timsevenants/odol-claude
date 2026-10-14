@@ -1,13 +1,12 @@
 name: "ODOL Claude"
 description: "Pro web-terminal met Claude Code: API-key login, HA-commands, back-ups, ha-mcp en fleet-tools"
-version: "1.0.0"
+version: "1.0.1"
 slug: "odol_claude"
 init: false
 
 arch:
   - aarch64
   - amd64
-  - armv7
 
 url: "https://github.com/timsevenants/odol-claude"
 

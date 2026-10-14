@@ -1,5 +1,12 @@
-ARG BUILD_FROM
-FROM ${BUILD_FROM}
+# Multi-platform base image (amd64 + aarch64). Vervangt het oude, per-arch
+# build.yaml: dat bestand is sinds Supervisor 2026.04 deprecated en de
+# BUILD_FROM-fallback wordt niet meer aangeleverd.
+FROM ghcr.io/home-assistant/base:3.21
+
+LABEL \
+    org.opencontainers.image.title="ODOL Claude" \
+    org.opencontainers.image.description="Pro web-terminal met Claude Code: API-key login, HA-commands, back-ups, ha-mcp en fleet-tools" \
+    org.opencontainers.image.source="https://github.com/timsevenants/odol-claude"
 
 # Systeem- en ontwikkeltools
 RUN apk add --no-cache \
